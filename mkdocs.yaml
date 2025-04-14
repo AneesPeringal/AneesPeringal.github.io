@@ -1,0 +1,24 @@
+site_name: Robotic Perception
+nav:
+    - Home: index.md
+    - Installation: Installation.md
+    - User guide:
+
+theme: readthedocs
+plugins:
+    - search
+    - autorefs
+markdown_extensions: 
+  - pymdownx.arithmatex
+  - admonition
+  - def_list
+  - pymdownx.tasklist:
+        custom_checkbox: true
+    #   generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
+
