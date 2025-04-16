@@ -2,13 +2,19 @@ site_name: Robotic Perception
 nav:
     - Home: index.md
     - Introduction: Intro.md
+    - Methodology: Method.md
+    - Results: Results.md
 
 theme: readthedocs
 plugins:
     - search
+    - glightbox
 markdown_extensions: 
   - admonition
   - def_list
+  - attr_list
+  - md_in_html
+  - pymdownx.blocks.caption
     #   generic: true
 
 extra_javascript:
