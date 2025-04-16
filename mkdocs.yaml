@@ -1,19 +1,14 @@
 site_name: Robotic Perception
 nav:
     - Home: index.md
-    - Installation: Installation.md
-    - User guide:
+    - Introduction: Intro.md
 
 theme: readthedocs
 plugins:
     - search
-    - autorefs
 markdown_extensions: 
-  - pymdownx.arithmatex
   - admonition
   - def_list
-  - pymdownx.tasklist:
-        custom_checkbox: true
     #   generic: true
 
 extra_javascript:
