@@ -1,2 +1,3 @@
 pymdown-extensions
 mkdocs-glightbox
+python-markdown-math
