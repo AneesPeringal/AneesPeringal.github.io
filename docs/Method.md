@@ -37,11 +37,40 @@ Stereo cameras use a similar methodology to find the 3D data of the scene. The m
 
 
 
-## Segmentation
+
+![Software methodology](Methodology.png)
+## II. Segmentation
 The stereo camera will give us dense data about all the pixels in the image. However, in most cases, we only need certain sparse data that pertains to our problem. In this case, we only need RGB-D data of the deformable slender object that we will be manipulating. To achieve this, we use segmentation to find which pixels in the image correspond to the DSO. Image segmentation is the process of splitting an image into different sets of pixels based on some condition. There are different methods of doing image segmentation:
 
 - **Semantic segmentation**: Classifies the pixels based on the meaning of the object. Employs deep learning methods that can learn the pixel based classification problem. Example U-net
 - **Region-based segmentation**: Classifies the pixels based on similarities between nearby pixels. The criteria for similarity can be color, texture etc. 
+
+### Semantic segmentation
+Semantic segmentation is typically done using deep-learning models. They have the ability to learn the meaning behind the image and therefore successfully classify the pixels that belong to a certain kind of object. The deep learning models that do this have an autoencoder architecture. Unet is a highly successful model that employs skip connections that ensures that finer details of the image can be successfully classified. To train the network for semantic segmenations, we need to have poxel wise labels for each image in the training data. The training is done to minimise the focal loss for each pixel. 
+
+![alt text](u-net-architecture.png)
+
+Semantic segmenation requires large amounts of data to give accurate results. There are other methods of segmentation that can be used to segment the deformable slender object from the image.
+
+### Region-based segmentation
+Segmentation can also be performed based on other aspects of the image. For example, a group of pixels having the same color or texture can be segmented. In this project, we adopt color based segmentation to find the pixels that are associated with the DSO. For color-based segmentation, we convert the RGB image into the HSV color space because it is less dependant on lighting conditions. In our case, the DSO is blue in color, so we set the limits in the HSV Space as:
+
+\\[\mathrm{Lower limit} = [100,150,50]\\]
+\\[\mathrm{Upper limit} = [140, 255, 255]\\]
+
+![HSV_color_space](hsvcone.gif)
+
+
+
+## III. Skelotonize
+
+## IV. Find contours
+
+## V. Create Links
+
+## VI. Filter Links
+
+## VII. Merge chains
 
 
 
