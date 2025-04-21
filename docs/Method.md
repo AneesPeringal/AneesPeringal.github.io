@@ -35,10 +35,20 @@ Stereo cameras use a similar methodology to find the 3D data of the scene. The m
 
 ![Stereo camera](Principle-of-stereo-cameras.png)
 
+The projection matrix of the camera that we are using in this project is found to be:
+
+\\[\mathbf{K} = \begin{bmatrix} 595.998 & 0 & 320.825\\
+0 & 595.998 &239.252 \\
+0 & 0 &1\end{bmatrix}\\]
 
 
 
 ![Software methodology](Methodology.png)
+## I. Preprocessing
+The RGB-D data obtained from the camera is preprocessed to downsample it to a standard size of $640\times 480$. Further the image is filtered with gaussian blurring to smooth out the image for noise. A gaussian kernal of {==size==} 
+
+![Preprocessed_image](example_image.png)
+
 ## II. Segmentation
 The stereo camera will give us dense data about all the pixels in the image. However, in most cases, we only need certain sparse data that pertains to our problem. In this case, we only need RGB-D data of the deformable slender object that we will be manipulating. To achieve this, we use segmentation to find which pixels in the image correspond to the DSO. Image segmentation is the process of splitting an image into different sets of pixels based on some condition. There are different methods of doing image segmentation:
 
@@ -58,11 +68,13 @@ Segmentation can also be performed based on other aspects of the image. For exam
 \\[\mathrm{Lower limit} = [100,150,50]\\]
 \\[\mathrm{Upper limit} = [140, 255, 255]\\]
 
+All the pixels that do not belong in this interval are equated to zero. 
+
 ![HSV_color_space](hsvcone.gif)
 
-
-
+![Segmented_image](segmented_image.png)
 ## III. Skelotonize
+To obtain the topology of the DSO from the image, we construct the skeloton of the image using Zhang's method {==cite==}. Zhang's Method for skeletonization is an efficient algorithm for thinning a binary image to obtain a skeleton representation of shapes. The method is based on iteratively removing pixels from the boundaries of the objects in the binary image while preserving the topology and structure of the shapes. Zhang’s algorithm works by applying a series of conditional rules that allow the removal of boundary pixels in a way that retains the essential structure of the object. Specifically, it works by iterating through the image and checking each pixel's neighborhood for continuity, and then removing pixels that satisfy the continuity. This process continues until no further pixels can be removed, resulting in a skeleton that represents the object as a thin, one-pixel-wide line.
 
 ## IV. Find contours
 
