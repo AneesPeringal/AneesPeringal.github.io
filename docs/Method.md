@@ -37,9 +37,9 @@ Stereo cameras use a similar methodology to find the 3D data of the scene. The m
 
 The projection matrix of the camera that we are using in this project is found to be:
 
-\\[\mathbf{K} = \begin{bmatrix} 595.998 & 0 & 320.825\\
+$$\mathbf{K} = \begin{bmatrix} 595.998 & 0 & 320.825 \\
 0 & 595.998 &239.252 \\
-0 & 0 &1\end{bmatrix}\\]
+0 & 0 &1\end{bmatrix} $$
 
 
 
@@ -76,7 +76,10 @@ All the pixels that do not belong in this interval are equated to zero.
 ## III. Skelotonize
 To obtain the topology of the DSO from the image, we construct the skeloton of the image using Zhang's method {==cite==}. Zhang's Method for skeletonization is an efficient algorithm for thinning a binary image to obtain a skeleton representation of shapes. The method is based on iteratively removing pixels from the boundaries of the objects in the binary image while preserving the topology and structure of the shapes. Zhang’s algorithm works by applying a series of conditional rules that allow the removal of boundary pixels in a way that retains the essential structure of the object. Specifically, it works by iterating through the image and checking each pixel's neighborhood for continuity, and then removing pixels that satisfy the continuity. This process continues until no further pixels can be removed, resulting in a skeleton that represents the object as a thin, one-pixel-wide line.
 
+![Skelotonized](skeleton.png)
+
 ## IV. Find contours
+Now that we have a one dimensional representation of the DSO in the image plane, we can find the contours that represent the topology of the DSO. 
 
 ## V. Create Links
 
