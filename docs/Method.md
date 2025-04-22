@@ -79,9 +79,10 @@ To obtain the topology of the DSO from the image, we construct the skeloton of t
 ![Skelotonized](skeleton.png)
 
 ## IV. Find contours
-Now that we have a one dimensional representation of the DSO in the image plane, we can find the contours that represent the topology of the DSO. 
+Now that we have a one dimensional representation of the DSO in the image plane, we can find the contours that represent the topology of the DSO. Contours are a sequence of points on the skeleton that are continous. 
 
 ## V. Create Links
+Points in the contour are used to create links. Link s
 
 ## VI. Filter Links
 
