@@ -75,18 +75,32 @@ All the pixels that do not belong in this interval are equated to zero.
 ![Segmented_image](segmented_image.png)
 ## III. Skelotonize
 To obtain the topology of the DSO from the image, we construct the skeloton of the image using Zhang's method {==cite==}. Zhang's Method for skeletonization is an efficient algorithm for thinning a binary image to obtain a skeleton representation of shapes. The method is based on iteratively removing pixels from the boundaries of the objects in the binary image while preserving the topology and structure of the shapes. Zhang’s algorithm works by applying a series of conditional rules that allow the removal of boundary pixels in a way that retains the essential structure of the object. Specifically, it works by iterating through the image and checking each pixel's neighborhood for continuity, and then removing pixels that satisfy the continuity. This process continues until no further pixels can be removed, resulting in a skeleton that represents the object as a thin, one-pixel-wide line.
-
-![Skelotonized](skeleton.png)
+<figure markdown="span">
+    ![Skelotonized](skeleton.png)
+    <figcaption style="text-align: center; font-style: italic;">1 pixel width representation of the rope</figcaption>
+</figure>
 
 ## IV. Find contours
 Now that we have a one dimensional representation of the DSO in the image plane, we can find the contours that represent the topology of the DSO. Contours are a sequence of points on the skeleton that are continous. 
 
 ## V. Create Links
-Points in the contour are used to create links. Link s
+Points in the contour are used to create links. A link is a collection of points in the countour that satisfies a direction continuity assumption. We assume that the DSO will deform in a smooth manner, this means that the image created by the DSO will also be smooth. If there are large changes in the direction of the countour, we stop the growing the link.
+
+
+
 
 ## VI. Filter Links
 
 ## VII. Merge chains
 
+![type:video](Algorithm_video.mp4)
 
+## 3D reconstruction
+Using the depth data at the points where the rope exists, we can reconstruct the shape of the rope in 3D. This is done by first inverting the perspective projection through:
+
+\[\mathbf{P}_x = \frac{(\mathbf{p}_x - c_x)}{f_x} \mathbf{P}_z\]
+
+\[\mathbf{P}_y = \frac{(\mathbf{p}_y - c_y)}{f_y} \mathbf{P}_z\]
+
+The z-cordinate can be obtained directly from the depth image.
 

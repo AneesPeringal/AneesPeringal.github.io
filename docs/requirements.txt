@@ -1,3 +1,4 @@
 pymdown-extensions
 mkdocs-glightbox
+mkdocs-video
 python-markdown-math
