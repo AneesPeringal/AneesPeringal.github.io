@@ -10,6 +10,9 @@ plugins:
     - search
     # - glightbox
     - mkdocs-video
+    - bibtex:
+        bib_file: refs.bib
+        # csl_file: ieee.csl
 
 markdown_extensions: 
   - pymdownx.arithmatex
