@@ -1,15 +1,16 @@
 site_name: Robotic Perception
 nav:
     - Home: index.md
-    - Introduction: Intro.md
-    - Methodology: Method.md
-    - Results: Results.md
+    # - Introduction: Intro.md
+    # - Methodology: Method.md
+    # - Results: Results.md
 
 theme: readthedocs
 plugins:
     - search
     # - glightbox
-    - mkdocs-video
+    - mkdocs-video:
+
     - bibtex:
         bib_file: refs.bib
         # csl_file: ieee.csl
