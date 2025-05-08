@@ -21,7 +21,7 @@ Monocular cameras use a single sensor to percieve the environment around them. T
 
 <figure markdown="span">
     ![alt text](cam_model_fig41.jpg)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 2:** Perspective projection model of a camera [[1]](https://jordicenzano.name/front-test/2d-3d-paradigm-overview-2011/camera-model/)</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 2:** Perspective projection model of a camera [1]</figcaption>
 </figure>
 
 The image formation in a monocular camera can be modelled by the perspective projection model which is given by:
@@ -35,14 +35,15 @@ f_x & 0 & c_x  \\
 $$
 
 Where $\mathbf{p}$ is the position of the image on the image plane in the homogenous coordinates, $f_x$, $f_y$, $c_x$ and $c_y$ are the focal lengeths and the principle point coordinates respectievely. Moreover, $\mathbf{P}$ is the position of the object in the 3D scene. It must be noted that a monocular camera produces a 2D projection of the 3D scene, therefore, it cannot measure directly the depth data that is contained in the scene. There are however, algorithms to estimate the depth information from monocular camera. The two main classes of algorithms are:
- - Triangulation based methods: Ex. structure from motion{==cite==}
- - Depth of field methods: Eg. depth from defocus{==cite==}
+
+ - Triangulation based methods: Ex. structure from motion [2]
+ - Depth of field methods: Eg. depth from defocus [3]
 
 A commonly used triangulation based technique is called structure from motion. This involves capturing images from the same camera at two different camera viewpoints, and using certain feature points that are same on both pictures to reconstruct a 3D structure of the scene. 
 
 <figure markdown="span">
     ![Structure from motion](Structure-from-Motion-SfM-process-is-illustrated-The-structure-in-the.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 2:** By detecting the change of some feature points in the image plane, the motion of the camera can be estimated. And using this, the 3D representation of the scene can be obtained from pictures at different viewpoints.{==cite==}</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 3:** By detecting the change of some feature points in the image plane, the motion of the camera can be estimated. And using this, the 3D representation of the scene can be obtained from pictures at different viewpoints.[4]</figcaption>
 </figure>
 
 
@@ -52,17 +53,18 @@ The key steps for estimating the 3d structure from a monocular camera using stru
  - Detect features such as corners that can be easily distinguished in different images
  - Match the detected features in one image to the other.
  - Estimate the motion of the camera between the two images. This can be done by solving the perspective-n-point problem.
- - The 3D position of the feature points are found by {==triangulation==}.
+ - The 3D position of the feature points are found by triangulation.
 
 Another class of methods make use of the focus of the image produced to estimate the depth information. A monocular camera has a limited range of positions where it can capture a sharp image. This can be seen from:
 <figure markdown="span">
     ![alt text](Depth-defocus-relationship-The-same-object-point-placed-at-different-distances-will-be.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 2:** Objects at a distance $u$ from the lens creates a sharp image at the image plane. However, other objects will result in a blurred image.[[2]](https://www.researchgate.net/publication/273947737/figure/fig8/AS:650806445473802@1532175756521/Depth-defocus-relationship-The-same-object-point-placed-at-different-distances-will-be.png)</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 4:** Objects at a distance $u$ from the lens creates a sharp image at the image plane. However, other objects will result in a blurred image.[5]</figcaption>
 </figure>
 
 USing the blur circle radius $r_b$, we can have an estimate of the depth by the equation: 
 
 \[r_b(z) = \frac{A(|z-z_f|)}{z}\frac{f}{z_f-f}\]
+
 Where $A$ is the aperture size, $f$ is the focal length, $z_f$ is the distance to the focal plane and finally $z$ is the depth of the object. If we know the blur circle radius, we can solve for $z$ to estimate the depth from defocus.
 
   
@@ -71,7 +73,7 @@ Stereo cameras use a triangulation method to find the 3D data of the scene. The 
 
 <figure markdown="span">
     ![Stereo camera](Principle-of-stereo-cameras.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 3:** Using cameras that are a known fixed ttransformation apart, depth in the scene can be estimated using the difference in the image produced by the two sensors.{==cite==}</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 5:** Using cameras that are a known fixed ttransformation apart, depth in the scene can be estimated using the difference in the image produced by the two sensors.[6]</figcaption>
 </figure>
 
 The projection matrix of the camera that we are using in this project is found to be:
@@ -87,16 +89,17 @@ In our project, we propose to use a vision based system to develop perception al
 
 <figure markdown="span">
     ![Software methodology](Methodology.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 4:** The steps taken in this methodology</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 6:** The steps taken in this methodology</figcaption>
 </figure>
 
 
 ## I. Preprocessing
-The RGB-D data obtained from the camera is preprocessed to downsample it to a standard size of $640\times 480$. Further the image is filtered with gaussian blurring to smooth out the image for noise. A gaussian kernal of {==size==} 
+The RGB-D data obtained from the camera is preprocessed to downsample it to a standard size of $640\times 480$. Further the image is filtered with gaussian blurring to smooth out the image for noise.
+
 
 <figure markdown="span">
     ![Preprocessed_image](example_image.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 5:** A typical example of an image of the DSO being manipulated</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 7:** A typical example of an image of the DSO being manipulated</figcaption>
 </figure>
 
 
@@ -104,7 +107,7 @@ The RGB-D data obtained from the camera is preprocessed to downsample it to a st
 ## II. Segmentation
 The stereo camera will give us dense data about all the pixels in the image. However, in most cases, we only need certain sparse data that pertains to our problem. In this case, we only need RGB-D data of the deformable slender object that we will be manipulating. To achieve this, we use segmentation to find which pixels in the image correspond to the DSO. Image segmentation is the process of splitting an image into different sets of pixels based on some condition. There are different methods of doing image segmentation:
 
-- **Semantic segmentation**: Classifies the pixels based on the meaning of the object. Employs deep learning methods that can learn the pixel based classification problem. Example U-net
+- **Semantic segmentation**: Classifies the pixels based on the meaning of the object. Employs deep learning methods that can learn the pixel based classification problem. Example U-net [7]
 - **Region-based segmentation**: Classifies the pixels based on similarities between nearby pixels. The criteria for similarity can be color, texture etc. 
 
 ### Semantic segmentation
@@ -112,7 +115,7 @@ Semantic segmentation is typically done using deep-learning models. They have th
 
 <figure markdown="span">
     ![alt text](u-net-architecture.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 6:** Deep-learning based semantic segmentation model.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 8:** Deep-learning based semantic segmentation model. [7]</figcaption>
 </figure>
 
 
@@ -128,33 +131,37 @@ All the pixels that do not belong in this interval are equated to zero.
 
 <figure markdown="span">
     ![HSV_color_space](hsvcone.gif)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 7:** HSV color spaced used for color based segmentation</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 9:** HSV color spaced used for color based segmentation</figcaption>
 </figure>
 
 <figure markdown="span">
     ![Segmented_image](segmented_image.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 8:** Example image after color based segmentation</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 10:** Example image after color based segmentation</figcaption>
 </figure>
 
 ## III. Our method
-To obtain the topology of the DSO from the image, we construct the skeloton of the image using Zhang's method [@Zhang1984]. Zhang's Method for skeletonization is an efficient algorithm for thinning a binary image to obtain a skeleton representation of shapes. The method is based on iteratively removing pixels from the boundaries of the objects in the binary image while preserving the topology and structure of the shapes. Zhang’s algorithm works by applying a series of conditional rules that allow the removal of boundary pixels in a way that retains the essential structure of the object. Specifically, it works by iterating through the image and checking each pixel's neighborhood for continuity, and then removing pixels that satisfy the continuity. This process continues until no further pixels can be removed, resulting in a skeleton that represents the object as a thin, one-pixel-wide line.
+To obtain the topology of the DSO from the image, we construct the skeloton of the image using Zhang's method [8]. Zhang's Method for skeletonization is an efficient algorithm for thinning a binary image to obtain a skeleton representation of shapes. The method is based on iteratively removing pixels from the boundaries of the objects in the binary image while preserving the topology and structure of the shapes. Zhang’s algorithm works by applying a series of conditional rules that allow the removal of boundary pixels in a way that retains the essential structure of the object. Specifically, it works by iterating through the image and checking each pixel's neighborhood for continuity, and then removing pixels that satisfy the continuity. This process continues until no further pixels can be removed, resulting in a skeleton that represents the object as a thin, one-pixel-wide line.
 
 <figure markdown="span">
     ![Skelotonized](skeleton.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 9:** 1 pixel width representation of the rope</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 11:** 1 pixel width representation of the rope</figcaption>
 </figure>
 
 Now that we have a one dimensional representation of the DSO in the image plane, we can find the contours that represent the topology of the DSO. Contours are a sequence of points on the skeleton that are continous. When occlusions occur, the image of the rope might not be continous and we may have several disjoint contours. Moreover, when there are self-occlusions, the contour might not follow the actual direction of the DSO an example of this is shown in:
-![alt text](Contours.png)
+
+<figure markdown="span">
+    ![alt text](Contours.png)
+    <figcaption style="text-align: center; font-style: italic;">**Figure 12:** The sequence of points in the contour does not match the actual sequence on the DSO. This should be corrected.</figcaption>
+</figure>
 
 To overcome this problem, we design an algorithm that operates on smaller segments of each contour to identify locally linear chains of connected points. For each contours, it traverses the points sequentially and splits it into smaller segments based on the local curvature. The traversal begins by initiallizing a starting point for the current segment. As points are added, the algorithm checks whether the euclidean distance between the segment starting point and the current point exceeds a fixed segment length $l_{thresh}$. If this length threshold is reached, the direction of the current segment is calculated using $\theta_i = (x_s - x_i,y_s - y_i)$ where $(x_s,y_s)$ and $(x_i, y_i)$ are the positions of the start of the segment and the current point in the image plane. If the angle between the current and the previous segment is below a predefined threshold $\theta_{thresh}>= \theta_i \cdot \theta_{i-1}$, this segment is added to the chain. Otherwise, a new chain is initialized. Through this method, we obtain a set of chains that are spacially coherant.
 
 <figure markdown="span">
     ![image](chains.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 1:** The different chains created from the contours of the DSO skeleton.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 13:** The different chains created from the contours of the DSO skeleton.</figcaption>
 </figure>
 
-The disjoint chains should now be rejoined to form the sequence of points that form the skeleton of the DSO. Each chain has two ends, so for an image that has $n$ chains, the total number of ends will be $2n$. The number of possible combinations are $\frac{n(n-2)}{2}$. To decide how the combination of chains should be, we use the hungarian algorithm which requires a cost matrix $\mathbf{C}$ that determines the cost of every possible assignment. The hangarian algorithm tries to minimise the cost function:
+The disjoint chains should now be rejoined to form the sequence of points that form the skeleton of the DSO. Each chain has two ends, so for an image that has $n$ chains, the total number of ends will be $2n$. The number of possible combinations are $\frac{n(n-2)}{2}$. To decide how the combination of chains should be, we use the hungarian algorithm [9] which requires a cost matrix $\mathbf{C}$ that determines the cost of every possible assignment. The hangarian algorithm tries to minimise the cost function:
 
 \[\min \sum_{k=1}^{2n} \mathbf{C}(k,\sigma(k))\]
 
@@ -170,7 +177,7 @@ The euclidean norm ensures that the two endds are close to each other and the cu
 
 <figure markdown="span">
     ![alt text](image-1.png)
-    <figcaption style="text-align: center; font-style: italic;">**Figure 1:** The disjoint chains are connected based on the solution of the hungarian algorithm.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Figure 14:** The disjoint chains are connected based on the solution of the hungarian algorithm.</figcaption>
 </figure>
 
   
@@ -191,7 +198,7 @@ The z-cordinate can be obtained directly from the depth image corresponding to $
 <div style="text-align: center;">
   <img src="3d_reconstruction.png" alt="alt text" style="width: 70%; display: block; margin: 0 auto;" />
   <figcaption style="font-style: italic; margin-top: 8px;">
-    <strong>Figure 1:</strong> Overview of the image processing
+    <strong>Figure 15:</strong> 3D reconstruction of the DSO using depth data.
   </figcaption>
 </div>
 
@@ -218,14 +225,31 @@ Explointing the spacial dependencies only, we attempt to find the 3D reconstruct
 
 <figure markdown="span">
     ![type:video](spacial.mp4){'width: 40%'}
-    <figcaption style="text-align: center; font-style: italic;">**Video 4:** When there are inevitable occlusions of the DSO by the manipulator. There are missing points on the DSO image.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Video 3:** When there are inevitable occlusions of the DSO by the manipulator. There are missing points on the DSO image.</figcaption>
 </figure>
 
-Now using the temporal dependancies, we can create a more accurate reconstruction of the manipulated object
+Now using the temporal dependancies, we can create a more accurate reconstruction of the manipulated object that takes into account the occluded parts of the DSO.
 <figure markdown="span">
     ![type:video](temporal.mp4){'width: 40%'}
-    <figcaption style="text-align: center; font-style: italic;">**Video 4:** When there are inevitable occlusions of the DSO by the manipulator. There are missing points on the DSO image.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Video 4:** Leveraging temporal consistency, we can obtain an approximation of the occluded DSO.</figcaption>
 </figure>
+
+# Conclusion
+
 # References
 
-[1] M. Saha and P. Isto, “Manipulation planning for deformable linear objects,” IEEE Transactions on Robotics, vol. 23, no. 6, pp. 1141–1150, 2007.
+[1] https://jordicenzano.name/front-test/2d-3d-paradigm-overview-2011/camera-model/
+
+[2] J. L. Schonberger and J.-M. Frahm, “Structure-from-motion revisited,” in Proceedings of the IEEE conference on computer vision and pattern recognition, 2016, pp. 4104–4113
+
+[3] M. Subbarao and G. Surya, “Depth from defocus: A spatial domain approach,” International Journal of Computer Vision, vol. 13, no. 3, p. 271–294, Dec. 1994. [Online]. Available: http://dx.doi.org/10.1007/BF02028349
+
+[4] ¨O. YILMAZ and F. KARAKUS¸ , “Stereo and kinectfusion for continuous 3d reconstruction and visual odometry,” Turkish Journal of Electrical Engineering and Computer Sciences, vol. 24, no. 4, pp. 2756–2770, 2016
+
+[5] https://www.researchgate.net/publication/273947737/figure/fig8/AS:650806445473802@1532175756521/Depth-defocus-relationship-The-same-object-point-placed-at-different-distances-will-be.png
+
+[6] https://blog.cometlabs.io/teaching-robots-presence-what-you-need-to-know-about-slam-9bf0ca037553#7851
+
+[7]  O. Ronneberger, P. Fischer, and T. Brox, “U-net: Convolutional networks for biomedical image segmentation,” 2015. [Online]. Available: https://arxiv.org/abs/1505.04597
+
+[8] T. Y. Zhang and C. Y. Suen, “A fast parallel algorithm for thinning digital patterns,” Communications of the ACM, vol. 27, no. 3, p. 236–239, Mar. 1984. [Online]. Available: http://dx.doi.org/10.1145/357994.358023
