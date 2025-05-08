@@ -25,6 +25,7 @@ Monocular cameras use a single sensor to percieve the environment around them. T
 </figure>
 
 The image formation in a monocular camera can be modelled by the perspective projection model which is given by:
+
 $$
 \mathbf{p} = \frac{1}{Z}\begin{bmatrix}
 f_x & 0 & c_x  \\
