@@ -211,27 +211,29 @@ To leverage the temporal dependencies, we use a video obtained of the manipulati
 
 <h2 align='center'> Results</h2>
 
-To test our methodology of making segmentation of DSOs aware of occlusions that may be unavoidable during manipulation, we choose a slender object that can be used as the object for manipulation. To simplify our experiments, we choose the manipulate the DSO with our hands rather than using a robotic manipulator. Although our end-goal is for this method to be used for robotic manipulation, we can use hand manipulation because the problems like occlusions will still be present in hand manipulation. 
+To test our methodology of making segmentation of DSOs aware of occlusions that may be unavoidable during manipulation, we choose a slender object that can be used as the object for manipulation. To simplify our experiments, we chose to manipulate the DSO with our hands rather than using a robotic manipulator. Although our end-goal is for this method to be used for robotic manipulation, we can use hand manipulation because problems like occlusions will still be present in hand manipulation.
 
-We initialize the experiment by placing the DSO on a table such that there are no occlusions of the DSO. We record a video of the DSO while we move the DSO such that there are occlusions due to our hand as well as due to other parts of the DSO itself. We investigate the performance of our method firstly by only considering the spatial dependencies of the DSO. We then investigate how the results change when we incorporate the temporal dependencies as well. The video of the DSO manipulation conducted is shown
 
+We initialise the experiment by placing the DSO on a table such that there are no occlusions of the DSO. We record a video of the DSO while we move the DSO such that there are occlusions due to our hand as well as due to other parts of the DSO itself. We provide both qualitative as well as quantitative validation for our method at estimating the shape of the DSO under occlusion. The video of the DSO manipulation conducted:
 <figure markdown="span">
     ![type:video](experiment.mp4){'width: 40%'}
     <figcaption style="text-align: center; font-style: italic;">**Video 2:** Manipulation of the DSO</figcaption>
 </figure>
 
-Exploiting the spatial dependencies only, we attempt to find the 3D reconstruction of the DLO during manipulation. The reconstruction throughout the manipulation experiment is shown in video
-
-<figure markdown="span">
-    ![type:video](spacial.mp4){'width: 40%'}
-    <figcaption style="text-align: center; font-style: italic;">**Video 3:** When there are inevitable occlusions of the DSO by the manipulator. There are missing points on the DSO image.</figcaption>
-</figure>
-
-Now using the temporal dependencies, we can create a more accurate reconstruction of the manipulated object that takes into account the occluded parts of the DSO.
+We can see in that our method is able to estimate the shape of the DSO under the occlusion. and that the shape reconstructed in 3D matches the actual shape of the DSO. 
 <figure markdown="span">
     ![type:video](temporal.mp4){'width: 40%'}
-    <figcaption style="text-align: center; font-style: italic;">**Video 4:** Leveraging temporal consistency, we can obtain an approximation of the occluded DSO.</figcaption>
+    <figcaption style="text-align: center; font-style: italic;">**Video 3:** Leveraging temporal consistency, we can obtain an approximation of the occluded DSO.</figcaption>
 </figure>
+
+However, to get a quantitative evaluation of our method at estimating the shape of the DSO under evaluation, we consider a video where we do not have any occlusion. We find the shape of the DSO in the absence of occlusions. Later, the same video is augmented to have an occlusion that is added in the form of a rectangle, as shown in figure. The shape estimated in the presence of the occlusion is compared with that in the absence of occlusions, and we conclude that we have an RMSE error of 7mm.
+
+<div style="text-align: center;">
+  <img src="artificial_occlusion.png" alt="alt text" style="width: 70%; display: block; margin: 0 auto;" />
+  <figcaption style="font-style: italic; margin-top: 8px;">
+    <strong>Figure 16:</strong> Artificial occlusion is added. For this frame the RMSE between occluded and non-occluded is only 7mm.
+  </figcaption>
+</div>
 
 # Conclusion
 In this project, we investigate the problem of deformable slender objects (DSO) segmentation in the presence of occlusion events. During manipulation of DSO, it is inevitable that the manipulator may come between the camera and the DSO causing occlusions. We need a method that can estimate the shape and position of the DSO even during occlusion events. To achieve this, we develop a computer vision algorithm that takes the segmented image of the DSO being manipulated and by leveraging some spatio-temporal assumptions on the evolution of DSO dynamics during manipulation, we are able to estimate the shape and position of the DLO with respect to the camera. Specifically, we assume that the spatial and temporal change in the DSO will be smooth. Currently, we check the performance of the algorithm qualitatively, however, we need further testing under different conditions and quantitative measures before the algorithm can be implemented in the real-world. Further work from this project will be mainly focused on quantitative validation of the method. This could be done using an external motion capture system as ground-truth to compare against.
