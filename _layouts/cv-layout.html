@@ -26,12 +26,14 @@ layout: compress
       </div>
     </div>
 
+    {% unless site.footer.hide == true %}
     <div class="page__footer">
       <footer>
         {% include footer/custom.html %}
         {% include footer.html %}
       </footer>
     </div>
+    {% endunless %}
 
     {% include scripts.html %}
 

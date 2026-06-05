@@ -28,7 +28,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "Anees Peringal is a doctoral student at Khalifa University, UAE. His research focuses on modelling and model based planning for deformable objects. He is also interested in the application of machine learning to robotics and control."
   location         : "Abu Dhabi, UAE"
-  employer         : "Khalifa university, UA"
+  employer         : "Khalifa university, UAE"
   uri              : # URL
   email            : "anees870@gmail.com" 
 
@@ -129,9 +129,11 @@ staticman:
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
-  hide                   : false     # change to true to hide the RSS feed in the footer
+  hide                   : true     # change to true to hide the RSS feed in the footer
   path                   : # blank (default) uses feed.xml
 
+footer:
+  hide                   : true     # change to true to hide the entire footer from the site
 
 # SEO Related
 google_site_verification :
