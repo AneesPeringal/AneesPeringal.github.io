@@ -23,7 +23,7 @@ repository               : "AneesPeringal/AneesPeringal.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "Casual_image.jpeg" # filename of avatar image placed in /images/ for author profile
   name             : "Anees Peringal"
   pronouns         : # example: "she/her"  
   bio              : "Anees Peringal is a doctoral student at Khalifa University, UAE. His research focuses on modelling and model based planning for deformable objects. He is also interested in the application of machine learning to robotics and control."
