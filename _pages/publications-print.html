@@ -1,0 +1,37 @@
+---
+layout: null
+permalink: /publications/print/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Publications — {{ site.author.name | escape }}</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    body {
+      font: 12pt Georgia, serif;
+      line-height: 1.5;
+      max-width: 175mm;
+      margin: auto;
+    }
+    h1 { font-size: 20pt; }
+    li { margin-bottom: 1em; break-inside: avoid; }
+    a { color: inherit; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>{{ site.author.name | escape }} — Publications</h1>
+  <ol>
+    {% assign publications = site.publications | sort: "date" | reverse %}
+    {% for post in publications %}
+      <li>
+        {{ post.citation | default: post.title }}
+        {% if post.paperurl %}
+          <a href="{{ post.paperurl | escape }}">[Paper]</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</body>
+</html>
